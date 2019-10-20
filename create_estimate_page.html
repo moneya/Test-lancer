@@ -4,93 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="styles/create_estimate_page.css">
     <title>Create Estimate</title>
+    <link rel="shortcut icon" href="https://res.cloudinary.com/ddu0ww15f/image/upload/v1571417665/icons8-estimates-16_adktgw.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/create_estimate_page.css">
 </head>
-<body class="container">
-   <!-- <div id="estimate">
-        <header>
-            <span class = "c-estimate shift">Estimates</span>
-            <ul>
-                <li class="login"><a  href="signin.html">Login</a></li>
-                <li class = "signup" ><a class = "signup" href="signup.html">Signup</a></li>
-            </ul>
+<body>
+  <div id="container">
+    <div>
+        <button class="close navM"  id="close"><img id="clear" src="https://res.cloudinary.com/celx/image/upload/v1570718446/vhmdnd4sf3f5w3burj4m.svg" alt=""></button>
+    </div>
+    <div>
+        <p class="nav cEstimate" id="cre">Create Estimate</p>
+    </div>
+    <div>
+       <input class="navM disabled" id="ext" type="button" value="NEXT">
+    </div>
+  </div>
 
-        </header>
-        <section id="new_user">
-            <div>
-                <a class="btn est" id="est_content" href="#">Create Estimate</a> <br>
-                <h2><p class = "pad">Estimates helps you place value to your work and time!</p></h2>
-                <p class = "pad"><h5 class = "pad">Craeate and estimate and easily convert it to your invoice and send to your client</h5></p>
-            </div>
-        </section>
-    </div>_-->
-    
-    <!-- FOR ACTUAL INPT-->
-   <!-- <div id="Create_estimate" class="hidden">-->
-        <div id="container">
+  <div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-12">
+      <h1>What project are you estimating?</h1>
+    </div>
+  </div>
+  </div>
 
-                <div>
-                    
-                    <button class="close"  id="close"><img id="clear" src="https://res.cloudinary.com/celx/image/upload/v1570718446/vhmdnd4sf3f5w3burj4m.svg" alt=""></button>
-                </div>
-                <div>
-                    <p class="nav c-estimate" id="cre">Create Estimate</p>
-                </div>
-                <div>
-                   <input class="nav disabled" id="ext" type="button" value="NEXT">
-                    
-                </div>
+  <div class="row ml-auto box justify-content-center">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">A previously created project</h5>
+                <p class="card-text">Find estimate for a previously created project, by doing so the estimate gets populated with some of the data.</p>
 
-            </div>
-    
-
-
-    
-       <section>
-           <h1>What project are you estimating?</h1>
-           <div class="cree">
-               <div class="lists">
-                   <div class="box">
-                        <h3 class="first-head"><h3>A previously created project</h3></p>
-                        <p class="contents">Find estimate for the previously created project, by
-                            doing so the estimate gets populated with some of the data
-                        </p>
-                   </div>
-                  
-                   <div class="contents dropdown">
-                           <select class="dropbtn" name="" onmouseout="verifyPath()" id="projectSelect">
-                               <option>Select Project</option>
-                               <option>Glacier Fintech App</option>
-                               <option> AB Technology Solutions Branding</option>
-                           </select>  
-                           <i class="fa fa-caret-down"></i>
-                           
-                   </div>
+                <div class="dropdown mr-1">
+                   <select class="dropbtn" name="" onmouseout="verifyPath()" id="projectSelect">
+                       <option value="select" selected="disabled">Select Project</option>
+                       <a href=""><option value="app" class="dropdown-item">Glacier Fintech App</option></a>
+                       <a href=""><option value="branding" class="dropdown-item">AB Technology Solutions Branding</option></a>
+                   </select>  
+                   <i class="fa fa-caret-down"></i>                           
                </div>
            </div>
-   
-   
-           <div id="cree"  class="cree">
-                   <div class="lists glacier">
-                       <div class="box">
-                            <h3 class="first-head">A new project</h3>
-                            <p class="contents">Create a new estimate and set up a new project <br />
-                                based on the information 
-                            </p>
-                       </div>
-                      
-                       <div class="contents project">
-                           <input class="l-proj" type="text" onmouseout="verifyPath()" placeholder= "Project Name" name="" id="createProject">
-                           <br>
-                           <span class="req">Required</span></div>
-       
-                   </div>
-               </div>
-               <button class="a-next disabled"><a href="#">NEXT</a></button>
-       </section>
-    </div>
-    </div>
+       </div>
+   </div>
+  
+    <div class="col-md-4">
+      <div class="card">
+          <div class="card-body">
+              <h5 class="card-title">A new project</h5>
+              <p class="card-text">Create a new estimate and set up a new project based on the
+                  information.
+              </p>
+            
+             <div class="project">
+                 <input class="l-proj" type="text" onmouseout="verifyPath()" placeholder= "Project Name" name="" id="createProject">
+                 <br>
+                 <span class="req">Required</span>
+             </div>
+          </div>
+       </div>
+     </div>
+
+ </div>
+
+<div class="container-fluid">
+<div class="row text-center">
+  <div class="col-12">
+    <button class="a-next disabled"><a href="#">NEXT</a></button>
+  </div>
+</div>
+</div>
 
     <script>
     let est_content = document.querySelector('#est_content');

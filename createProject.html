@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="style.css" type="text/css">-->
+    <title>Document</title>
+    <link rel="shortcut icon" href="https://res.cloudinary.com/ddu0ww15f/image/upload/v1571417665/icons8-estimates-16_adktgw.png" type="image/x-icon">
+    <style type="text/css">
+        body,
+        html {
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .outer-container {
+            border: 1px solid #919191;
+            padding-bottom: 1.5rem;
+        }
+
+        .outer-container h1 {
+            margin: 1.6rem 0;
+            /* padding-bottom: 1.5rem; */
+        }
+
+        .border-bottom-row {
+            border-bottom: 1px solid #919191;
+            padding-bottom: 1rem;
+        }
+
+        .cur {
+            padding-top: 1rem;
+        }
+
+        .naira {
+            font-size: 20px;
+        }
+
+        .modal-body {
+            /* font-size: 12px!important; */
+            max-width: 1100px;
+            margin: 1rem auto;
+        }
+
+        .modal-footer {
+            justify-content: center;
+        }
+
+        .modal-header {
+            padding: 0 !important;
+        }
+        .modal-header .close {
+            padding: 0% !important;
+            margin: 0% !important;
+            height: 100%;
+        }
+        .close {
+            float: left;
+        }
+
+        input {
+            text-indent: 2px;
+            font-size: 12px;
+            height: 35px;
+        }
+
+        .modal-footer .btn,
+        .top-next {
+            display: flex;
+            align-items: center;
+            height: 60px;
+            width: 200px;
+            justify-content: center;
+            border: none !important;
+            border-radius: 0px !important;
+            padding: 5px 40px;
+            background: rgba(196, 196, 196, 0.4) !important;
+        }
+
+        .modal-footer .btn:hover,
+        .top-next:hover {
+            background: rgba(196, 196, 196, 0.7) !important;
+        }
+
+        .modal-title {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+
+        h3.modal-title {
+            display: grid;
+            grid-template-columns: 0.5fr 0.5fr 3fr 0.8fr;
+            align-items: center;
+            width: 100%;
+            font-size: 18px;
+            text-align: center !important;
+
+        }
+
+        .cur {
+            font-size: 18px;
+        }
+
+        .cur span {
+            font-size: 16px;
+        }
+
+        .container-fluid h1 {
+            font-family: ubuntu;
+            font-size: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .proj-date input {
+            width: 100%;
+            display: inline;
+            border: 1px solid gray;
+        }
+
+        .proj-date {
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        .proj-date span {
+            font-size: 10px;
+        }
+
+        .eval {
+            border: 1px solid #919191;
+            /* padding:20px 10%;  */
+            padding: 1.5rem .7rem;
+            /* padding-bottom: 10px; */
+            border-bottom: none;
+        }
+
+        .eval input {
+            border: none;
+            outline: none;
+            width: 90%;
+        }
+        .req-cont{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid gray;
+        }
+        .req{
+            color: aqua;
+            font-size: 15px;
+        }
+        .eval input:focus {
+            border-bottom: 1px solid blue;
+        }
+
+        ./* top-next {
+            float: right;
+            padding-top: inherit;
+            padding-bottom: inherit;
+            margin-top: -17px !important;
+
+            display: inline !important;
+            vertical-align: middle !important;
+        } */
+
+       /*  h3.modal-title {
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        } */
+
+        .prev-icon,
+        .close {
+            vertical-align: middle !important;
+        }
+
+        .prev-icon {
+            border-left: 1px solid gray !important;
+            border-right: 1px solid gray !important;
+        }
+
+        .modal-content {
+            border: none !important;
+        }
+
+        .modal-footer {
+            border: none !important;
+        }
+
+        .top-next {
+            color: white !important;
+            height: 70px;
+            font-size: 1.5em;
+        }
+
+        .modal-footer button {
+            padding: .6rem 3rem !important;
+        }
+
+        @media screen and (max-width: 400px) {
+            .modal-header h3 {
+                font-size: 14px;
+            }
+            h3.modal-title {
+            grid-template-columns: 2fr 2fr 3fr 2.5fr;
+
+        }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="modal-content">
+        <div class="modal-header">
+
+            <h3 class="modal-title font-weight-bold" id="exampleModalScrollableTitle">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <button type="button" class="close prev-icon">
+                    <
+                    <span aria-hidden="true"></span> 
+                </button>
+                <p>Create Estimate</p> 
+                <span class="btn top-next">Next</span>
+            </h3>
+
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+                <h1>Evaluation</h1>
+                <p>Please input the required details in the form below</p>
+                <div class="eval">
+                    <div class="req-cont">
+                        <input type="text" width="100%" class="">
+                        <p class="req">required</p>
+                    </div>
+                    
+                    
+                </div>
+
+
+                <div class="container-fluid outer-container">
+                    <h1>Billing</h1>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>How long in hours will it take you to complete this project?</p>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <input type="number" placeholder="Hours">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>How long do you charge per hour?</p>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <input type="number" placeholder="NGN 0.00">
+                        </div>
+                    </div>
+
+                    <div class="row border-bottom-row">
+                        <div class="col-sm-6" style="display: flex; align-items: center;">
+                            <p>Project Starts/Ends?</p>
+                        </div>
+                        <div class="col-3 proj-date">
+                            <span>Set start date</span>
+                            <input type="date">
+                        </div>
+                        <div class="col-3 proj-date">
+                            <span>Set end date</span>
+                            <input type="date">
+                        </div>
+
+                    </div>
+
+
+                    <h1>Expenses</h1>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>How much will it cost you to power your devices or equipment for this project?</p>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <input type="number" placeholder="N 0.00">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>Are you subcontracting to anyone?</p>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="E.g Illustrator, Consulting">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>How much would they be paid?</p>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <input type="number" placeholder="NGN 0.00">
+                        </div>
+                    </div>
+                    <h1>Expertise</h1>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>How many similar projects have you done before?</p>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <input type="number" placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="row border-bottom-row">
+                        <div class="col-sm-6">
+                            <p>Out of 5, how would you rate your experience level in executing this project?</p>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <input type="number" min="1" max="5" placeholder=""> /5
+                        </div>
+                    </div>
+
+                    <h3 class="cur">Currency: <span class="naira"><u>NGN</u></span></h3>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary align-middle">Next</button>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

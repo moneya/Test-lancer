@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/client-doc-veiw.css">
+    <link rel="shortcut icon" href="https://res.cloudinary.com/ddu0ww15f/image/upload/v1571417665/icons8-estimates-16_adktgw.png" type="image/x-icon">
   </head>
 
   <body>
@@ -18,8 +19,8 @@
           <span class="nav-span"></span>
           <span class="nav-span"></span>
         </div>
-        <a href="#"><h4 class="header-nav-item header-nav-item-left">Project Info</h4></a>
-        <a href="#"><h4 class="header-nav-item">Documents</h4></a>
+        <a href="#"><h4 class="header-nav-item header-nav-item-left header-links first-header-link">Project Info</h4></a>
+        <a href="#"><h4 class="header-nav-item header-links">Documents</h4></a>
       </div>
 
       <div class="sidebar mobile-sidebar" id="sidebar">
@@ -32,17 +33,35 @@
             <tr>
               <td><a href="client-information-active.html"><img src="https://res.cloudinary.com/dcoqt2wpo/image/upload/v1570556428/Vector_envenf.png" alt="client" class="icon"></td><td class="nav-txt"><a href="client-information-active.html">Client</a></td>
             </tr>
-            <tr>
-              <td><a href="project.html"><img src="https://res.cloudinary.com/dcoqt2wpo/image/upload/v1570556428/lightbulb_wemwzq.png" alt="project" class="icon"></a></td>
-              <td class="nav-txt"><a href="project.html">Project</a></td>
-              <td><img src="https://res.cloudinary.com/slarin/image/upload/v1570706703/contact-support/expand_more_w4e0eb.svg" class="caret-dwn" onclick="drop()">
-              <div class="dropdown-menu" id="dd-menu">
-                <a href="#" class="menu-item">Action</a>
-                <a href="#" class="menu-item">Another action</a>
-                <a href="#" class="menu-item">Something else here</a>
-              </div>
+            <tr class="click-project">
+              <td><a><img src="https://res.cloudinary.com/dcoqt2wpo/image/upload/v1570556428/lightbulb_wemwzq.png" alt="project" class="icon"></a></td>
+              <td class="nav-txt"><a>Project</a></td>
+              <td><img src="https://res.cloudinary.com/slarin/image/upload/v1570706703/contact-support/expand_more_w4e0eb.svg"  class="caret-dwn">
+             
               </td>
             </tr>
+            
+
+            
+              <tr class="hidden-sidebar-links">
+                <td></td>
+                <td class="nav-txt"><a href="#">Status</a></td>
+              </tr>
+              <tr class="hidden-sidebar-links">
+                <td></td>
+                <td class="nav-txt"><a href="#">Overview</a></td>
+              </tr>
+              <tr class="hidden-sidebar-links">
+                <td></td>
+                <td class="nav-txt"><a href="#">Collaborators</a></td>
+              </tr>
+              <tr class="hidden-sidebar-links">
+                <td></td>
+                <td class="nav-txt"><a href="#">Task</a></td>
+              </tr>
+            
+
+
             <tr>
               <td><a href="invoice-view.html"><img src="https://res.cloudinary.com/dcoqt2wpo/image/upload/v1570556428/approve-invoice_efuypp.png" alt="invoice" class="icon"></a></td><td class="nav-txt"><a href="invoice-view.html">Invoice</a></td>
             </tr>
@@ -144,7 +163,7 @@
                   <td colspan="2" class= "no-border-table"></td>
                   <td class ="light-head dbl-border">Discount</td> 
                   <td class = "dbl-border" >N/A</td> </tr>
-                <tr> 
+                <tr   class="last-table-row"> 
                   <td colspan="2" class= "no-border-table"></td> 
                   <td class= "no-border-table">Amount Due</td>
                   <td class= "no-border-table">NGN38,500</td>
@@ -164,16 +183,32 @@
       </div>
 
     <script>
-      function drop() {
-        let x = document.getElementById('dd-menu');
-        x.classList.toggle('active');
-      }
+      // function drop() {
+      //   let x = document.getElementById('dd-menu');
+      //   x.classList.toggle('active');
+      // }
       function bars() {
         let y = document.getElementById('sidebar');
         let z = document.getElementById('nav-btn');
         y.classList.toggle('active');
         z.classList.toggle('active');
       }
+
+      
+      let sidebarLinks = false
+      document.querySelector('.click-project').addEventListener('click', () => {
+        if(!sidebarLinks) {
+          document.querySelectorAll('.hidden-sidebar-links').forEach((e) => {
+            e.classList.add( 'show-sidebar-links' )
+          })
+          sidebarLinks = true;
+        } else {
+           document.querySelectorAll( '.hidden-sidebar-links' ).forEach((e) => {
+             e.classList.remove( 'show-sidebar-links' )
+           })
+           sidebarLinks = false
+        }
+      })
     </script>
 
   </body>

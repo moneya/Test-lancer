@@ -1,563 +1,746 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
-	<title>Lancer</title>
+    <title>Notifications</title>
+    <link rel="shortcut icon" href="https://res.cloudinary.com/ddu0ww15f/image/upload/v1571417665/icons8-estimates-16_adktgw.png" type="image/x-icon">
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <!-- <link rel="stylesheet" href="style/project.css"> -->
+    <style type="text/css">
+        /*Main page style by message*/
+        @import url(http://fonts.googleapis.com/css?family=Open+Sans);
+        :root{
+            --primary-color: #091429;
+            --secondary-color: #0ABAB5;
+            --dark-color: #262626;
+            --light-color: #B1B1B1;
+        }
+           /****************************/
+          /*------- main styles ------*/
+         /****************************/
+        .text-primary{
+            color: var(--primary-color) !important;
+        }
+        .text-secondary{
+            color: var(--secondary-color) !important;
+        }
+        .text-dark{
+            color: var(--dark-color) !important;
+        }
+        .text-light{
+            color: var(--light-color) !important;
+        }
+        .bg-primary{
+            background-color: var(--primary-color) !important;
+        }
+        .bg-secondary{
+            background-color: var(--secondary-color) !important;
+        }
+        .bg-light{
+            background-color: var(--light-color) !important;
+        }
+        .bg-dark{
+            background-color: var(--dark-color) !important;
+        }
+        .btn{
+            border: none !important;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            transition: all ease-in-out .5s;
+        }
+        .btn::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 25%;
+            height: 100%;
+            width: 40%;
+            background-color: #000;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            transition: all ease-in-out 1s;
+            transform: scale(5, 5);
+        }
+        .btn:active::after {
+            padding: 0;
+            margin: 0;
+            opacity: .2;
+            transition: 0s;
+            transform: scale(0, 0);
+        }
+        .btn-primary{
+            background-color: var(--primary-color) !important;
+        }
+        .btn-secondary{
+            background-color: var(--secondary-color) !important;
+        }
+        .btn-primary-outline{
+            background-color: transparent !important;
+            color: var(--primary-color)  !important;
+            border: 1px solid var(--primary-color)  !important;
+        }
+        .btn-secondary-outline{
+            background-color: transparent !important;
+            color: var(--secondary-color)  !important;
+            border: 2px solid var(--secondary-color)  !important;
+        }
+        .btn-primary:hover, .btn-secondary:hover, .btn-primary-outline:hover, .btn-secondary-secondary:hover{
+            border-color: inherit !important;
+            opacity: 0.8 !important;
+        }
+        /*------Nav bar---------*/
+        a,
+        a:hover,
+        a:focus {
+          color: inherit;
+          text-decoration: none;
+          transition: all 0.3s;
+        }
+        .navbar {
+          padding-top: 0px;
+          padding-bottom: 0px;
+          background-color: #fff;
+          border: none;
+          height: 70px;
+          border-radius: 0;
+          margin-bottom: 10px;
+          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-btn {
+          box-shadow: none;
+          outline: none !important;
+          border: none;
+        }
+        .navbar-nav .nav-item .nav-link:hover{
+          transition: 0.25s;
+          background-color: #ecf3ff;
+        }
+        .line {
+          width: 100%;
+          height: 1px;
+          border-bottom: 1px dashed #ddd;
+          margin: 40px 0;
+        }
+        .notify{
+            color: blue;
+            width: 20px;
+            height: 20px;
+           
+        }
+        .wrapper #content{
+        }
+        /* ---------------------------------------------------
+            SIDEBAR STYLE
+        ----------------------------------------------------- */
+        .wrapper {
+          display: flex;
+          width: 100%;
+          align-items: stretch;
+          perspective: 1500px;
+        }
+        #sidebar {
+          min-width: 220px;
+          max-width: 220px;
+          background: var(--primary-color);
+          color: #fff;
+          transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+          transform-origin: bottom left;
+        }
+        #sidebar.active {
+          margin-left: -250px;
+          transform: rotateY(100deg);
+        }
+        #sidebar .sidebar-header {
+          padding: 20px;
+          background: var(--primary-color);
+        }
+        #sidebar ul.components {
+          padding: 20px 0;
+          border-bottom: 1px solid var(--primary-color);
+        }
+        #sidebar ul p {
+          color: #fff;
+          padding: 10px;
+        }
+        #sidebar ul li a {
+          padding: 1.2rem 0rem;
+          padding-left: 40px;
+          font-size: 1em;
+          font-weight: 600;
+          display: block;
+          transition: 0.4;
+        }
+        #sidebar ul li a:hover {
+          color: #ffffff;
+          background: rgba(19, 41, 82, 1);
+        }
+        #sidebar ul li a img {
+            margin-top: -4px !important;
+            margin-left: 4px;
+            margin-right: 4px;
+        }
+        #sidebar.active ul li a span {
+            vertical-align: text-bottom !important;
+        }
+        #sidebar ul li.active > a,
+        a[aria-expanded="true"] {
+          color: #fff;
+          background: rgba(19, 41, 82, 1);
+        }
+        a[data-toggle="collapse"] {
+          position: relative;
+        }
+        .dropdown-toggle::after {
+          display: block;
+          position: absolute;
+          top: 50%;
+          right: 20px;
+          transform: translateY(-50%);
+        }
+        ul ul a {
+          font-size: 0.9em !important;
+          padding-left: 30px !important;
+          background: rgba(19, 41, 82, 1);;
+        }
+        ul.CTAs {
+          padding: 20px;
+        }
+        ul.CTAs a {
+          text-align: center;
+          font-size: 0.9em !important;
+          display: block;
+          border-radius: 5px;
+          margin-bottom: 5px;
+        }
+        a.download {
+          background: #fff;
+          color: #7386D5;
+        }
+        a.article,
+        a.article:hover {
+          background: rgba(19, 41, 82, 1) !important;
+          color: #fff !important;
+        }
+        /* ---------------------------------------------------
+            CONTENT STYLE
+        ----------------------------------------------------- */
+        .notification-case{
+            margin: 5vw;
+            margin-top: 4vw;
+            font-family: Open Sans;
+        }
+        .notification-box img {
+            margin: 10px;
+            margin-left: 20px;
+            margin-right: -10px;
+            padding: 14px;
+            max-width: 10vw;
+            height: 10vh;
+        }
+        
+        .notification-box {
+            border: 1px solid #C4C4C4;
+            margin-bottom: 15px;
+            margin-right: 20px;
+            font-family: Open Sans;
+        }
+        h1 {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 20px;
+            margin-top: 24px;
+            
+        }
+        .float .my-float{
+            font-size: 25px;
+            line-height: 20px;
+            color: white;
+            margin-top: 50px;
+            text-decoration: none;
+        }
+        #add-something{
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 12;
+          }
+        #content {
+          width: 100%;
+          min-height: 100vh;
+          transition: all 0.3s;
+        }
+        #sidebarCollapse {
+          width: 40px;
+          height: 40px;
+          background: #f5f5f5;
+          cursor: pointer;
+          display: none;
+        }
+        #sidebarCollapse span {
+          width: 80%;
+          height: 2px;
+          margin: 0 auto;
+          display: block;
+          background: #555;
+          transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+          transition-delay: 0.2s;
+        }
+        #sidebarCollapse span:first-of-type {
+          transform: rotate(45deg) translate(2px, 2px);
+        }
+        #sidebarCollapse span:nth-of-type(2) {
+          opacity: 0;
+        }
+        #sidebarCollapse span:last-of-type {
+          transform: rotate(-45deg) translate(1px, -1px);
+        }
+        #sidebarCollapse.active span {
+          transform: none;
+          opacity: 1;
+          margin: 5px auto;
+        }
+        .alert.alert-primary.py-0.px-2.small.m-0.pending{
+            color: #F67A06;
+            font-weight: bold;
+            background-color: rgba(201, 133, 70,0.3);
+            border-color: rgba(201, 133, 70,0.3);
+        }
+        .alert.alert-primary.py-0.px-2.small.m-0.active{
+            color: #179615;
+            font-weight: bold;
+            background-color: #76D874;
+            border-color:  #76D874;
+        }
+        .container-fluid .input-group{
+            margin-left: 400px;
+            width: 350px;
+        }
+      
+        .container-fluid .mydrop-down {
+            width: 300px;
+        }
+       
+        /* ---------------------------------------------------
+            MEDIAQUERIES
+        ----------------------------------------------------- */
+        @media (max-width: 616px) {
+          #sidebar {
+            margin-left: -220px;
+            transform: rotateY(90deg);
+          }
+          #sidebarCollapse {
+            width: 40px;
+            height: 40px;
+            background: #f5f5f5;
+            cursor: pointer;
+            display:block;
+          }
+          #sidebar.active {
+            margin-left: 0;
+            transform: none;
+          }
+          #sidebarCollapse span:first-of-type,
+          #sidebarCollapse span:nth-of-type(2),
+          #sidebarCollapse span:last-of-type {
+            transform: none;
+            opacity: 1;
+            margin: 5px auto;
+          }
+          #sidebarCollapse.active span {
+            margin: 0 auto;
+          }
+          #sidebarCollapse.active span:first-of-type {
+            transform: rotate(45deg) translate(2px, 2px);
+          }
+          #sidebarCollapse.active span:nth-of-type(2) {
+            opacity: 0;
+          }
+          #sidebarCollapse.active span:last-of-type {
+            transform: rotate(-45deg) translate(1px, -1px);
+          }
+          .container-fluid .input-group{
+            margin-left: -20px;
+            width: 220px;
+            }
+          .container-fluid .mydrop-down {
+            width: 100%;
+            }
+          .container-fluid .mydrop-down {
+            width: 100%;
+            }
+            .container-fluid{
+                margin-left: 40px;
+            }
+        }
+        @media (max-width: 533px) {
+            #sidebar {
+              margin-left: -220px;
+              transform: rotateY(90deg);
+            }
+  
+            #sidebarCollapse {
+              width: 40px;
+              height: 40px;
+              background: #f5f5f5;
+              cursor: pointer;
+              display:block;
+            }
+  
+            #sidebar.active {
+              margin-left: 0;
+              transform: none;
+            }
+            #sidebarCollapse span:first-of-type,
+            #sidebarCollapse span:nth-of-type(2),
+            #sidebarCollapse span:last-of-type {
+              transform: none;
+              opacity: 1;
+              margin: 5px auto;
+            }
+            #sidebarCollapse.active span {
+              margin: 0 auto;
+            }
+            #sidebarCollapse.active span:first-of-type {
+              transform: rotate(45deg) translate(2px, 2px);
+            }
+            #sidebarCollapse.active span:nth-of-type(2) {
+              opacity: 0;
+            }
+            #sidebarCollapse.active span:last-of-type {
+              transform: rotate(-45deg) translate(1px, -1px);
+            }
+  
+            .container-fluid .input-group{
+              margin-left: -100px;
+              width: 100px;
+              padding-left: -200px;
+              }
+  
+            .container-fluid .mydrop-down {
+              width: 100%;
+              }
+  
+              .container-fluid{
+                  margin-left: -40px;
+              }
+          }
+          @media (max-width: 1024px) {
+            #sidebar {
+              margin-left: -220px;
+              transform: rotateY(90deg);
+            }
+  
+            #sidebarCollapse {
+              width: 40px;
+              height: 40px;
+              background: #f5f5f5;
+              cursor: pointer;
+              display:block;
+            }
+  
+            #sidebar.active {
+              margin-left: 0;
+              transform: none;
+            }
+            #sidebarCollapse span:first-of-type,
+            #sidebarCollapse span:nth-of-type(2),
+            #sidebarCollapse span:last-of-type {
+              transform: none;
+              opacity: 1;
+              margin: 5px auto;
+            }
+            #sidebarCollapse.active span {
+              margin: 0 auto;
+            }
+            #sidebarCollapse.active span:first-of-type {
+              transform: rotate(45deg) translate(2px, 2px);
+            }
+            #sidebarCollapse.active span:nth-of-type(2) {
+              opacity: 0;
+            }
+            #sidebarCollapse.active span:last-of-type {
+              transform: rotate(-45deg) translate(1px, -1px);
+            }
+  
+            #content .container-fluid{
+                margin-left: 0px;
+               
+                }
+            .container-fluid .input-group{
+              margin-left: 60px;
+              width: 150px;
+              }
+  
+            .container-fluid .mydrop-down {
+              width: 100%;
+              }
+  
+            .container-fluid .mydrop-down {
+              width: 100%;
+              }
+          }
+             
+          
+  
+  
+        /* ---------------------------------------------------
+            Table
+        ----------------------------------------------------- */
+        table.project-table{
+          border-collapse:separate; 
+          border-spacing: 0 1em;
+        }
+        table.project-table tbody tr{
+          padding-bottom: 10px !important;
+          width: 100px;
+        }
+        table.project-table tbody tr td span.text-small{
+          font-size: 8px;
+        } 
+        table.project-table tbody tr td, table.project-table thead tr th {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .dropleft .dropdown-toggle::before{
+          display: none;
+        }
+        /*------------floating button---------*/
+        #add-something{
+          position: fixed;
+          bottom: 100px;
+          left: 300px;
+          z-index: 12;
+        }
+    </style>
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 </head>
-<style type="text/css">
-* {
-	box-sizing: border-box;
-	font-family: sans-serif;
-}
 
-body {
-	min-height: 100vh;
-	min-width: 100vw;
-
-}
-
-nav {
-	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-	box-shadow: 0px 3px rgba(0, 0, 0, 0.25);
-}
-
-form.search-form input[type=text] {
-	padding: 7px 3px;
-	font-size: 17px;
-	border: 1px solid #B1B1B1;
-	float: left;
-	width: 85%;
-	background: #FFFFFF;
-	border-left: none;
-	border-radius: 0px 4px 4px 0px;
-	margin-bottom: 20px;
-}
-
-form.search-form button {
-	float: left;
-	width: 15%;
-	padding: 7px 3px;
-	background: #FFFFFF;
-	color: black;
-	font-size: 17px;
-	border: 1px solid #B1B1B1;
-	border-right: none;
-	cursor: pointer;
-	border-radius: 4px 4px 0px 0px;
-	margin-bottom: 20px;
-}
-
-form.search-form button:hover {
-	background: #091429;
-}
-
-form.search-form::after {
-	content: "";
-	clear: both;
-	display: table;
-}
-
-nav img {
-	height: 30px;
-	width: 30px;
-	padding: 5px;
-	margin: 8px;
-}
-
-.navli {
-	border-right: 2px solid #B1B1B1;
-	margin-bottom: 14px;
-}
-
-.user {
-	width: 50px;
-	height: 50px;
-	background-color: #FFFFFF;
-	color: #000000;
-	border: 1px solid;
-	border-radius: 50px;
-	text-align: center;
-	padding: 15px 15px;
-	margin: 7px;
-	text-decoration: none;
-	
-}
-
-.menu {
-	width: 15%;
-	float: left;
-	padding: 15px;
-}
-
-.main {
-	width: 85%;
-	float: left;
-	padding-left: 15px;
-	overflow: hidden;
-
- 
-}
-
-h1 {
-	font-family: sans-serif;
-	font-style: normal;
-	font-weight: bold;
-	font-size: 18px;
-	margin-bottom: 20px;
-	margin-top: 24px;
-	
-}
-
-
-.notification-box img {
-	margin: 10px;
-	margin-left: 20px;
-	margin-right: -10px;
-	padding: 14px;
-}
-
-.notification-box {
-	border: 1px solid #C4C4C4;
-	margin-bottom: 15px;
-	margin-right: 20px;
-}
-
-
-b {
-	font-family: sans-serif;
-	font-style: normal;
-	font-weight: bold;
-	font-size: 14px;
-	
-}
-
-
-span {
-	font-family: sans-serif;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 14px;
-	line-height: 2
-}
-
-p {
-	font-family: sans-serif;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 12px;
-	margin-bottom: 0px;
-}
-
-
-.main .float {
-	position: fixed;
-	width: 50px;
-	height: 50px;
-	bottom: 40px;
-	left: width;
-	margin-left: 50px;
-	background-color: #0ABAB5;
-	color: #FFF;
-	border: none;
-	border-radius: 50px;
-	text-align: center;
-	box-shadow: 2px 2px 3px #999;
-	text-decoration: none;
-}
-
-.float .my-float{
-	font-size: 25px;
-	line-height: 20px;
-	color: white;
-	margin-top: 50px;
-	text-decoration: none;
-}
-
-/* sidebar p */
-.sidebar ul a {
-margin-top: 30%;
-font-weight: bold;
-font-size: 12px;
-line-height: 15px;
-color: white;
-display: block;
-text-decoration: none;
-text-align: left;
-letter-spacing: 1px;
-
-}
-
-.sidebar a {
-	text-decoration: none;
-	color: white;
-}
-
-.sidebar img, {
- padding: 5px;
-}
-
-#sideBarBtn, #closebtn {
-	display: none;
-}
-
-.sidebar a:hover {
-  color: #f1f1f1;
-}
-
-.sidebar {
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #091429;
-  overflow-x: hidden;
-  padding-top: 20px;
-  text-align: center;
-  transition: 0.5s;
-
-}
-
-
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 40px;
-  margin-left: 50px;
-}
-
-.openbtn {
-  font-size: 15px;
-  cursor: pointer;
-  color: black;
-  border: none;
-  background-color: #fff;
-}
-
-@media screen and (min-width: 710px) and (max-width: 850px) {
-
-h1, .notification-box, nav {
-	margin-left: 80px;
-}
-}
-
-@media screen and (min-width: 850px) and (max-width: 1090px) {
-
-h1, .notification-box, nav {
-	margin-left: 70px;
-}
-}
-
-
-@media screen and (max-width: 710px) {
-body {
-	box-sizing: border-box;
-	
-}
-
-nav {
-	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-	box-shadow: 0px 1.5px rgba(0, 0, 0, 0.25);
-}
-
-.main {
-	width: 100%;
-}
-
-.sidebar ul a {
-margin-top: 20%;
-font-size: 11px;
-line-height: 10px;
-letter-spacing: 1px;
-
-}
-
-#sideBarBtn, #closebtn {
-	display: block;
-	
-}
-
-b, span {
-	font-size: 12px;
-}
-
-p {
-	font-size: 10px;
-}
-
-.sidebar {
-  width: 0px;
-  height: 80vh;
-
-}
-
-
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 0px;
-  font-size: 25px;
-  margin-left: 50px;
-}
-
-form.search-form input[type=text] {
-	padding: 7px 3px;
-	font-size: 10px;
-	border: 1px solid #B1B1B1;
-	float: left;
-	width: 85%;
-	background: #FFFFFF;
-	border-left: none;
-	border-radius: 0px 4px 4px 0px;
-	margin-bottom: 20px;
-}
-
-form.search-form button {
-	float: left;
-	width: 15%;
-	padding: 7px 3px;
-	background: #FFFFFF;
-	color: black;
-	font-size: 10px;
-	border: 1px solid #B1B1B1;
-	border-right: none;
-	cursor: pointer;
-	border-radius: 4px 4px 0px 0px;
-	margin-bottom: 20px;
-}
-
-form.search-form button:hover {
-	background: #0b7dda;
-}
-
-form.search-form::after {
-	content: "";
-	clear: both;
-	display: table;
-}
-
-nav img {
-	height: 18px;
-	width: 18px;
-	padding: 2.5px;
-	margin: 3px;
-}
-
-.navli {
-	border-right: none;
-	margin-bottom: 7px;
-}
-
-.user {
-	width: 25px;
-	height: 25px;
-	background-color: #FFFFFF;
-	color: #000000;
-	border: 1px solid;
-	border-radius: 50px;
-	text-align: center;
-	padding: 10px 10px;
-	margin: 3.5px;
-	text-decoration: none;
-	
-}
-
-}
-
-@media screen and (max-width: 400px) {
- .search-form {
-	float: right; 
-}
-
-#sideBarBtn {
-	display: block;
-}
-
-
-}
-
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
-}
-
-</style>
 <body>
-	<div class="menu">
-		<div id="mySidebar" class="sidebar">
-			<a href="javascript:void(0)" class="closebtn" id="closebtn" onclick="closeNav()">×</a>
-			<img src="https://res.cloudinary.com/dlyuvm4rn/image/upload/v1570657880/lancers1.png" alt="Lancers-logo" style="text-align: center;
-                        ;
-                        size: 10%;">
-                        <ul>
-                        	
-                          	<p><a href="documents.html"><img src="https://res.cloudinary.com/dlyuvm4rn/image/upload/v1570657805/hicon.png" alt="home-icon"> Dashboard</a></p>
-                          	<p><a href="client-information-active.html"><img src="https://res.cloudinary.com/dlyuvm4rn/image/upload/v1570657765/cicon.hng.png" alt="customer-icon"> Clients</a></p>
-                          	<p><a href="#"><img src="https://res.cloudinary.com/dlyuvm4rn/image/upload/v1570657724/bicon.png" alt="lightbulb-icon"> Project
-                              <i class="fa fa-caret-down"></i></a></p>
-                          	<p><a href="invoice-loggedin_user.html"><img src="https://res.cloudinary.com/dlyuvm4rn/image/upload/v1570657846/iicon.png" alt="invoice-icon"> Invoice</a></p>
-                          	<p><a href="#contract"><img src="https://res.cloudinary.com/dlyuvm4rn/image/upload/v1570657912/picon.png" alt="Project-icon"> Contract</a></p>
-                          	<p><a href="#Proposals"><img src="https://res.cloudinary.com/dlyuvm4rn/image/upload/v1570657682/Aicon.png" alt="approval-icon"> Proposals</a></p>
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <img src="https://lancer-app.000webhostapp.com/images/svg/Lancers.svg" height="35" width="auto" class="img img-responsive">
+            </div>
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#">
+                        <img src="https://lancer-app.000webhostapp.com/images/svg/home.svg" height="20" width="auto"> <span> Dashboard</span></a>
+                </li>
+                <li>
+                    <a href="clientInformation.html">
+                        <img src="https://lancer-app.000webhostapp.com/images/svg/customer.svg" height="20" width="auto"> <span> Client</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><img src="https://lancer-app.000webhostapp.com/images/svg/lightbulb.svg" height="20" width="auto"> <span> Project</span></a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#" class="pl-4">Status</a>
+                        </li>
+                        <li>
+                            <a href="#" class="pl-4">Overview</a>
+                        </li>
+                        <li>
+                            <a href="collaborator.html" class="pl-4 ">Collabrators</a>
+                        </li>
+                        <li>
+                            <a href="task.html" class="pl-4">Task</a>
+                        </li>
+                        <li>
+                            <a href="#" class="pl-4"> Documents</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li>
+                    <a href="Invoice-new-user.html">
+                        <img src="https://lancer-app.000webhostapp.com/images/svg/approve-invoice.svg" height="20" width="auto"> <span> Invoice</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="https://lancer-app.000webhostapp.com/images/svg/policy.svg" height="20" width="auto"> <span> Contract</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="https://lancer-app.000webhostapp.com/images/svg/approval.svg" height="20" width="auto"> <span> Proposals</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Page Content Holder -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    
+                    <form class="form-inline my-2 ml-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text border-right-0 bg-white" id="basic-addon1"><i class="fas fa-search"></i></span>
+                            </div>
+                            <input class="form-control border border-left-0 searchBox" type="text" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                    
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link p-3" href="contact-support.html"><img src="https://lancer-app.000webhostapp.com/images/svg/help.svg" height="25" width="auto"> <span class="d-lg-none d-xl-none"> You need help?</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link border-left p-3" href="#"><img src="https://lancer-app.000webhostapp.com/images/svg/alarm-clock.svg" height="25" width="auto"> <span class="d-lg-none d-xl-none"> Reminder</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <!-- <a class="nav-link border-left p-3" href="#"><span class="notify"> <img src="https://lancer-app.000webhostapp.com/images/svg/notification.svg" id="notify" height="25" width="auto"></span> <span class="d-lg-none d-xl-none"> Notification</span></a> -->
+                                <a class="nav-link border-left p-3" href="notification.html"><i class="fa fa-bell notify" aria-hidden="true"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link border-left p-3" href="#"><span class="border rounded-circle p-1 font-weight-bold">AU</span> <span class="d-lg-none d-xl-none"> Hello John</span></a>
+                            </li>
                         </ul>
-		</div>
-		
-	</div>
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="notification-case">
+                <h1>NOTIFICATIONS</h1>
+    
+                <div class="notification-box">
+                    <div class="d-flex bd-highlight">
+                        <div class="p-2 flex-shrink-1 bd-highlight">
+                            <img src="https://res.cloudinary.com/helencee/image/upload/v1571155836/notification-icons/green-ribbon_gcyuoh.png">
+                            
+                        </div>
+                            <div class="p-2 w-100 bd-highlight">
+                                <b>A new invoice was created</b><br>
+                            <span>It is a long established fact that a reader will be distracted by the readable content of a page when at its layout.</span>
+                            <p>Today 10:21AM</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="notification-box">
+                    <div class="d-flex bd-highlight">
+                        <div class="p-2 flex-shrink-1 bd-highlight">
+                            <img src="https://res.cloudinary.com/helencee/image/upload/v1571155836/notification-icons/green-ribbon_gcyuoh.png">
+                            
+                        </div>
+                            <div class="p-2 w-100 bd-highlight">
+                                <b>A new invoice was created</b><br>
+                            <span>It is a long established fact that a reader will be distracted by the readable content of a page when at its layout.</span>
+                            <p>Today 10:21AM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="notification-box">
+                    <div class="d-flex bd-highlight">
+                        <div class="p-2 flex-shrink-1 bd-highlight">
+                            <img src="https://res.cloudinary.com/helencee/image/upload/v1571155745/notification-icons/brown-ribbon_yuhmkj.png">
+                            
+                        </div>
+                            <div class="p-2 w-100 bd-highlight">
+                                <b>A new invoice was created</b><br>
+                            <span>It is a long established fact that a reader will be distracted by the readable content of a page when at its layout.</span>
+                            <p>Today 10:21AM</p>
+                        </div>
+                    </div>
+                </div>
+        </div>
 
-	<div class="main" id="main">
-		<nav>
-			<div class="d-flex bd-highlight">
-				<div class="p-2 flex-grow-1 bd-highlight">
-					<div>
-					  <button id="sideBarBtn" class="openbtn" onclick="openNav()">☰</button>
-					</div>
-					<form class="search-form" action="#" style="margin:auto;max-width:300px">
-						<button type="submit" id="searchbtn"><i class="fa fa-search" id= searchIco></i></button><input type="text" placeholder="Search.." name="search">
-					</form>
+    </div> 
+    <button class="btn btn-secondary text-white rounded-circle" id="add-something">
+        <i class="fas fa-plus"></i>
+    </button>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+            const searchBox = document.querySelector('.searchBox');
+            const status = document.querySelector('.status');
+            const filterNames =()=>{
+                const titles = document.querySelectorAll('.titles');
+                const searchBoxValue = searchBox.value.toLowerCase();
+            
+                titles.forEach(title=>{
+                    if(!title.textContent.toLowerCase().includes(searchBoxValue)){
+                        title.parentElement.style.display = "none"
+                    }else{
+                        title.parentElement.style.display = "";
+                    }
+                })
+            }
+            const filterStatus =()=>{
+                const statusText = document.querySelectorAll('.alert-primary')
+                
+                statusText.forEach(text => {
+                    if(status.value !== 'All'){
+                        if(status.value === text.textContent){
+                            text.parentElement.parentElement.style.display = ""
+                        }else{
+                            text.parentElement.parentElement.style.display = "none"
+                        }
+                     }else{
+                        text.parentElement.parentElement.style.display = ""
+                     }
+                })  
+            }
+            searchBox.addEventListener('keyup', filterNames);
+            status.addEventListener('change', filterStatus);
+               
+        });
+    </script>
 
-				</div>
-				<div class="p-2 bd-highlight navli">
-					<a href="#" ><img src="https://res.cloudinary.com/ros4eva/image/upload/v1570747848/help_bv586q.png"></a>
-				</div>
-				<div class="p-2 bd-highlight navli">
-					<a href="#" ><img src="https://res.cloudinary.com/ros4eva/image/upload/v1570747848/alarm_nqoo8i.png"></a>
-				</div>
-				<div class="p-2 bd-highlight navli">
-					<a href="#" ><img src="https://res.cloudinary.com/ros4eva/image/upload/v1570747847/notification_lipoc8.png"></a>
-				</div>
-				<div class="p-2 bd-highlight">
-					<a href="#" class="user"><b >PN</b></a>
-				</div>
-			</div>
-		</nav>
-		<h1>NOTIFICATIONS</h1>
-		<div class="notification-box">
-			<div class="d-flex bd-highlight">
-				<div class="p-2 flex-shrink-1 bd-highlight">
-					<img src="https://res.cloudinary.com/ros4eva/image/upload/v1570747847/Vector_c4lyp5.png">
-				</div>
-			  	<div class="p-2 w-100 bd-highlight">
-			  		<b>A new invoice was created</b><br>
-					<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua.</span>
-					<p>Today 10:21AM</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="notification-box">
-			<div class="d-flex bd-highlight">
-				<div class="p-2 flex-shrink-1 bd-highlight">
-					<img src="https://res.cloudinary.com/ros4eva/image/upload/v1570747847/Vector3_gicch8.png">
-				</div>
-			  	<div class="p-2 w-100 bd-highlight">
-			  		<b>A new invoice was created</b><br>
-					<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua.</span>
-					<p>Today 10:21AM</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="notification-box">
-			<div class="d-flex bd-highlight">
-				<div class="p-2 flex-shrink-1 bd-highlight">
-					<img src="https://res.cloudinary.com/ros4eva/image/upload/v1570747847/Vector_c4lyp5.png">
-				</div>
-			  	<div class="p-2 w-100 bd-highlight">
-			  		<b>A new invoice was created</b><br>
-					<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua.</span>
-					<p>Today 10:21AM</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="notification-box">
-			<div class="d-flex bd-highlight">
-				<div class="p-2 flex-shrink-1 bd-highlight">
-					<img src="https://res.cloudinary.com/ros4eva/image/upload/v1570747847/Vector1_a4qdov.png">
-				</div>
-			  	<div class="p-2 w-100 bd-highlight">
-			  		<b>A new invoice was created</b><br>
-					<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua.</span>
-					<p>Today 10:21AM</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="notification-box">
-			<div class="d-flex bd-highlight">
-				<div class="p-2 flex-shrink-1 bd-highlight">
-					<img src="https://res.cloudinary.com/ros4eva/image/upload/v1570747847/Vector1_a4qdov.png">
-				</div>
-				<button class="float"><a href="#" class="my-float">+</a></button>
-			  	<div class="p-2 w-100 bd-highlight">
-			  		<b>A new invoice was created</b><br>
-					<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua.</span>
-					<p>Today 10:21AM</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="notification-box">
-			<div class="d-flex bd-highlight">
-				<div class="p-2 flex-shrink-1 bd-highlight">
-					<img src="https://res.cloudinary.com/ros4eva/image/upload/v1570747847/Vector_c4lyp5.png">
-				</div>
-			  	<div class="p-2 w-100 bd-highlight">
-			  		<b>A new invoice was created</b><br>
-					<span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua.</span>
-					<p>Today 10:21AM</p>
-				</div>
-			</div>
-		</div>
-
-	</div>
-
+    
 	<script type="text/javascript">
 		function openNav() {
 		  document.getElementById("mySidebar").style.width = "200px";
 		  
 		}
-
 		function closeNav() {
 		  document.getElementById("mySidebar").style.width = "0";
 		}
-
 		const w = window.innerWidth
 		let y = document.getElementById('main');
-
 		window.onclick = function(event) {
 		    if (event.target == y && w <= 710) {
 		     closeNav()
 		 }
 		}
-
-		// const w = window.innerWidth
-
-		// if (w > 710) {
-		// 	document.getElementById("closebtn").style.display = "none"
-		// 	document.getElementById("sideBarBtn").style.display = "none"
-		// 	// document.getElementById("logo").style.display = "none"
-		// }
-
-		// if (w <= 710) {
-		// 	document.getElementById("closebtn").style.display = ""
-		// 	document.getElementById("sideBarBtn").style.display = ""
-		// }
 	</script>
-	
+
 </body>
+
 </html>

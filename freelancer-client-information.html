@@ -1,113 +1,404 @@
 <!DOCTYPE html>
-<html>
-    <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link href="https://fonts.googleapis.com/css?family=Red+Hat+Text&display=swap" rel="stylesheet">
-            <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-            <link  href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-            <link rel="stylesheet" href="styles/freelancer-client-information.css">        
-            <title>Client Information</title>
 
-    </head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Lancer Client Information</title>
+    <link rel="shortcut icon" href="https://res.cloudinary.com/ddu0ww15f/image/upload/v1571417665/icons8-estimates-16_adktgw.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400&display=swap" rel="stylesheet">
+    <style>
+      *,
+      *::after,
+      *::before {
+        margin: 0;
+        padding: 0;
+        box-sizing: inherit;
+      }
 
-    <body>
-    <aside>
-            <img src="lancers.png" id="lancers">
-            <div class="title">
-            <a href="#"><img src="Group 1.png" id="group1"><div id="dash">Dashboard</div></a>
-            <a href="#"><img src="Group 2.png" id="group2"><div id="client">Client</div></a>
-            <a href="#"><img src="Group 3.png" id="group3"><div id="project">Project</div><a>
-            <a href="#"><img src="Group 4.png" id="group4"><div id="invoice">Invoice</div></a>
-            <a href="#"><img src="Group 5.png" id="group5"><div id="contract">Contract</div></a>
-            <a href="#"><img src="Group 6.png" id="group6"><div id="proposal">Proposals</div></a>
-            </div>
-    </aside>
+      .headers{
+          display: flex;
+          justify-content: space-between;
+          flex-basis: 100%;
+          margin-left: 3rem;
+      }
 
-<section>
-    <header>
-            <div class="navigation">
-                <nav class="header-con">
-                    <a href="#" class="link">
-                       <div id="pro"> Project Info</div>
-                    </a>
-                
-                    <a href="#" class="link">
-                        <div id="cli">Client Info</div>
-                    </a>
-                    <a href="#" class="link">
-                        <div id="set">Settings</div>
-                    </a> 
-                    <a href="#" class="link">
-                        <div id="tools">Tools & Resources</div>
-                    </a>         
-                </nav>
-            </div>
+      html,body {
+        font-family: 'Ubuntu', sans-serif;
+        overflow-x:hidden;
+      }
+
+      .main-body {
+        position: relative;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+
+      }
+      a:hover {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.1);
+        padding: 1rem 3rem 1rem 0rem !important;
+        position: fixed;
+        top: 0; 
+        left: 14rem;
+        width: calc(100% - 14rem);
+        z-index: 998;
+        background-color: white;
+        backface-visibility: hidden;
+      }
+
+      .main-heading {
+        margin-left: 3rem;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      .hamburger {
+        display: none;
+      }
+
+      .header-lists {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1rem !important;
+        margin-left: 4rem !important;
+        position: relative;
+        margin: 0;
+      }
+
+      .header-lists li {
+        display: inline-block;
+        padding-right: 1.6rem;
+      }
+
+      
+
+      .support-list {
+        display: inline-grid !important;
+        grid-template-columns: 1fr 2fr;
+        grid-column-gap: 0.4rem;
+        align-items: center;
+      } 
+      main {
+        margin-top: 4rem;
+       margin-left: 14rem;
+      }
+
+
+
+
+      aside {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: #091429;
+        height: 100vh !important;
+        z-index: 999;
+        width: 14rem;
+        color: white;
+        padding-top: 3rem;
+        padding-left: 1rem;
+
+      }
+      aside img {
+        color: white;
+       height: 26px;
+       width: auto;
+       display: inline-block;
+       padding-right: 1rem;
+      }
+
+      aside ul {
+        margin-top: 3rem;
+      } 
+      aside ul li {
+        margin-bottom: 1.7rem;
+      }
+      .aside-logo {
+        transform: scale(1.4);
+        padding-left: 1.3rem;
+        display: inline-block;
+        
+      }
+
+      @media(max-width: 950px) {
+        .header {
+           padding: 0.7rem 3rem 0.7rem 0rem !important;
+        }
+      }
+      @media(max-width: 850px) {
+        aside {
+          display: none;
+        }
+
+        .profile-list {
+          margin-right: 3rem;
+        }
+
+        .headers {
+            justify-content: space-around;
+        }
+
+        .hamburger {
+          position: absolute;
+  /* z-index: 1; */
+  right: 0;
+  top: -17px;
+  height: 20px;
+  width: 28px;
+  cursor: pointer;
+  margin-right: 1.6rem;
+  padding-right: 0 !important;
+        }
+
+        .hamburger-btn {
+          /* margin-left: 4rem; */
+          display: block;
+          /* width: 7px;
+          height: 2px; */
+          background: black;
+          position: absolute;
+    right: 0rem;
+    top: 12px;
+    width: 25px;
+    height: 3px;
+    transition: 0.5s all ease;
+    /* cursor: pointer; */
+        }
+        .hamburger-btn::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      width: 25px;
+      height: 3px;
+      background: black;
+      transition: 0.5s all ease;
+      /* background: set-text-color($primary-color);
+      @include transition-ease; */
+    }
+
+    .hamburger-btn::after {
+      content: '';
+      position: absolute;
+      top: 8px;
+      width: 25px;
+      height: 3px;
+      background:black;
+      /* background: set-text-color($primary-color);
+      @include transition-ease; */
+      transition: 0.5s all ease;
+    }
+
+    .open-menu {
+      display: block !important;
+    }
+
+    .cross-hamburger {
+      transform: rotate(360deg);
+      background: transparent;
+    }
+
+    .cross-hamburger::before {
+      transform: rotate(45deg) translate(5px, 8px);
+    }
+
+    .cross-hamburger::after {
+      transform: rotate(-45deg) translate(3px, -7px);
+    }
+        .header {
+          width: 100% !important;
+          left: 0;
+        }
+        main {
+          margin-left: 0 !important;
+          margin-top: 2.5rem;
+        }
+        .main-image {
+          width: 75%;
+        }
+        .second-heading {
+          width: 70%;
+        }
+        .main-form {
+          width: 70%;
+        }
+      }
+      @media(max-width: 750px) {
+        .main-container {
+          width: auto !important;
+        }
+        .headers {
+            /* justify-content: flex-start; */
+        }
+      }
+      @media(max-width: 670px) {
+        .main-heading {
+          font-size: 1.5rem;
+    margin-left: 15px;
+        }
+
+        
+        /* .header-lists {
+          margin-right: 0 !important;
+          margin-left: 0 !important;
+        }
+        .header-lists li {
+          padding-right: 1rem;
+        } */
+        .hamburger-btn {
+          top: 11px;
+          height: 2px;
+        }
+        .hamburger-btn::before {
+          top: -6px;
+          height: 2px;
+        }
+        .hamburger-btn::after {
+          top: 6px;
+          height: 2px;
+        }
+        .cross-hamburger::before {
+      transform: rotate(45deg) translate(4px, 6px);
+    }
+
+    .headers {
+        margin-left: 0;
+    }
+
+    .cross-hamburger::after {
+      transform: rotate(-45deg) translate(2px, -5px);
+    }
+      }
+      @media(max-width: 600px) {
+        .header {
+              /* display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-row-gap: 0.5rem; */
+    flex-direction: column;
+    height: 3.5rem;
+        }
+        .headers {
+            width: 100%;
+        }
+        .headers h5 {
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .hamburger-div {
+            align-self: flex-end;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-body">
+        <header class="header">
+          <!-- Header -->
+          <div class="headers">
+            <h5>Project Info</h5>
+            <h5>Client Info</h5>
+            <h5>Settings</h5>
+            <h5>Tools &amp; Resources</h5>
+           
+          </div>
+          <div class="hamburger-div">
+            <ul class="header-lists">
+              <li class="hamburger" id="menuBtn">
+                <span class="hamburger-btn"></span>
+              </li>
+            </ul>
+          </div>
+          
         </header>
-
-    <button class="box1">
-    <div id="edit">Edit</div>
-    </button>
-    <button class= "box2">
-    <div id="delete">Delete</div>
-    </button>
-</section>
-
-<section class="client-info">
-        <div id="contact">Contact</div>
-
-    <div class="name">
-        <div id="nme">Name</div>
-        <div id="john">John Doe</div>
+        <aside id="aside">
+            <!-- aside -->
+            <img class="aside-logo" src="./images/logo.svg" alt="Logo">
+            <ul>
+                <li>
+                    <a href=""><img src="./images/home.svg" alt="" /> Dashboard</a>
+                </li>
+                <li>
+                    <a href=""><img src="./images/customer.svg" alt="" /> Clients</a>
+                </li>
+                <li>
+                    <a href=""><img src="./images/estimates.svg" alt="" /> Estimates</a>
+                </li>
+                <li>
+                    <a href=""><img src="./images/lightbulb.svg" alt="" />
+                        Projects</a>
+                </li>
+                <li>
+                    <a href=""><img src="./images/invoice.svg" alt="" /> Invoices</a>
+                </li>
+                <li>
+                    <a href=""><img src="./images/contract.svg" alt="" /> Contract</a>
+                </li>
+                <li>
+                    <a href=""><img src="./images/proposal.svg" alt="" /> Proposals</a>
+                </li>
+            </ul>
+        </aside>
+        <main>
+          <!-- Main body -->
+          <!-- Add contents of main body here -->
         
-        <div id= "add">
-        <div id="mail">Email Address</div>
-        <div id="gmail">Johndoe@gmail.com</div>
-        </div>
-        
-        <div id="numb">
-        <div id="phone">Phone Number</div>
-        <div id="number">+2348064528518</div>
-        </div>
+        </main>
     </div>
-
-        <div id="billing">Billing Information</div>
-    
-    <div class="curr">
-        <div id="currency">Currency</div>
-        <div id="ngn">NGN</div>
-        
-        <div id= "home">
-        <div id="address">Address</div>
-        <div id="lorem">Lorem Ipsum Dolor Set</div>
-        </div>
-        
-        <div id="place">
-        <div id="city">City</div>
-        <div id="abuja">Abuja</div>
-        </div>
-    </div>
-
-    <div class="cde">
-        <div id="zip">Zip Code</div>
-        <div id="code">234</div>
-        
-        <div id= "count">
-        <div id="country">Country</div>
-        <div id="nigeria">Nigeria</div>
-        </div>
-        
-        <div id="st">
-        <div id="state">State</div>
-        <div id="abj">Abuja</div>
-        </div>
-    </div>
-
-    <div id="more">More</div>
-    <div id="na">N/A</div>
-</section>
-	
-	
-    </body>
-    
+  </body>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    const menuBtn = document.getElementById("menuBtn")
+    const aside = document.getElementById("aside")
+    let showMenu = false
+    menuBtn.addEventListener("click", () => {
+      if(!showMenu) {
+      aside.classList.add("open-menu")
+      document.querySelector(".hamburger-btn").classList.add("cross-hamburger")
+      
+      showMenu = true;
+    } else {
+      aside.classList.remove("open-menu")
+       document.querySelector(".hamburger-btn").classList.remove( "cross-hamburger" )
+      showMenu = false;
+    }
+    })
+  </script>
 </html>
+
+<!-- Blue: #091429 -->
+<!-- Button:  -->
+
+

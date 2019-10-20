@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Invoice View</title>
+    <link rel="shortcut icon" href="https://res.cloudinary.com/ddu0ww15f/image/upload/v1571417665/icons8-estimates-16_adktgw.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
@@ -73,15 +74,20 @@ tbody, .bold {
         font-weight: 900;
         font-size: 1.05rem;
      }
-     .invoice-main {
+     .invoice-main, #page-content-wrapper {
+      width: 80%;
+     }
+
+     .navbar {
       width: 100%;
      }
     .invoice-container {
         position: relative;
         top: 3rem;
-        width: 52.5vw;
+        width: 100%;
+        /*width: 52.5vw;*/
         margin-left: 4rem;
-        padding-right: 2rem!important;
+        /*padding-right: 2rem!important;*/
         background: #FFFFFF;
         border: 1px solid #C4C4C4;
         box-sizing: border-box;
@@ -90,6 +96,7 @@ tbody, .bold {
     .invoice-body {
         position: relative;
         width: 55.5vw;
+        width: 80%;
     }
 .invoice-table {
   padding-bottom: 2rem;
@@ -110,7 +117,7 @@ tbody, .bold {
         float: right;
     }
     h1 {
-        color: rgb#546067;
+        color: #546067;
         font-size: 4rem;
         font-family: 'Ubuntu', sans-serif;
         font-style: normal;
@@ -125,7 +132,8 @@ body {
     overflow-x: hidden;
 }
 #sidebar-wrapper {
-  height: 90vh;
+  min-height: 200vh;
+  /*position: fixed;*/
   width: 40vh;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)!important;
   -webkit-transition: margin .25s ease-out;
@@ -180,6 +188,7 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     letter-spacing: .9px;
+    font-size: 14px;
 }
 #sidebar-wrapper .sidebar-heading {
   padding: 0.975rem 3.3rem;
@@ -215,7 +224,9 @@ svg {
   padding-bottom: .2rem;
 }
 #page-content-wrapper {
-  min-width: 100%;
+  width: 100%;
+  /*margin-left: auto;
+  margin-right: -20%;*/
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -239,15 +250,50 @@ svg {
         font-family: Ubuntu;
         font-weight: bold;
         font-size: 14px;
+        border-color: #0ABAB5;
 }
 .btn.bg {
     color: #fff;
     background-color: #0ABAB5;
 }
+
+.btn-primary {
+  background-color: #0ABAB5;
+    border-color: #0ABAB5;
+}
+
+.toggleNav {
+    display: none;
+  }
+
+.toggleDesktop {
+  display: inline-block;
+  display: none;
+  margin-left: 10px;
+  /*border: 1px solid red;*/
+  padding: .25rem .75rem;
+  line-height: 1;
+  background-color: transparent;
+    border: 1px solid transparent;
+  font-size: 1.25rem;
+  border-color: rgba(0,0,0,.1);
+  color: rgba(0,0,0,.5);
+  border-radius: .25rem;
+}
+
+/*.smallcont {
+  margin-left: 8%;
+  margin-right: -200px;
+}*/
+
+
 @media (max-width: 992px) {    
 #sidebar-wrapper {
-  height: 80vw;
+  min-height: 160vh;
 }
+
+
+
     td,
     th {
         padding: 0 0 7px !important;
@@ -281,8 +327,18 @@ tbody, .bold {
         position: relative;
         top: 3rem;
         width: 54vw;
-        margin-left: 4.5rem;
+        width: 100%;
+        margin-left: 5.5rem;
         margin-bottom: 2rem;
+    }
+
+    .invoice-main, #page-content-wrapper {
+      width: 80%;
+     }
+    .invoice-body {
+        position: relative;
+        width: 55.5vw;
+        width: 80%;
     }
 .invoice-table {
   padding-left: 0;
@@ -314,10 +370,23 @@ tbody, .bold {
     font-weight: normal;
     font-size: 1rem;
     }
+    #page-content-wrapper {
+  min-width: 100%;
+}
+
+.toggleDesktop {
+  display: block;
+}
+
+.navbar-toggler {
+  display: block;
+}
+
     @media (max-width: 991px) {
         .nav-item.ml-3 {
             margin-left: 0!important;
         }
+
     }
 }
 @media (max-width: 768px) {
@@ -350,13 +419,14 @@ img {
 #sidebar-wrapper .sidebar-heading {
   padding: 0.975rem 2.3rem;
   font-size: 1.15rem;
+  color: #fff;
 }
 .btn-outline-dark {
         font-size: 10px;
     padding: .275rem .5rem;
 }
 .btn-outline-dark.ml-4 {
-    margin-left: .5rem!important;
+    margin-left: 0rem!important;
 }
 h1 {
         font-size: 16px;
@@ -396,15 +466,23 @@ tbody, .bold {
         /* display: none; */
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
+
+    #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
     
     .invoice-body.ml-4 button {
       display: block !important;
-      margin: 0.3rem auto;
+      margin: 0.3rem 0;
+      margin-left: 0% !important
+      ;
       width: 100%;
     }
     #sidebar-wrapper {
-    width: 15vh;
+      width: 25vh;
     height: 92vw;
   }
 img {
@@ -424,6 +502,7 @@ img {
 #sidebar-wrapper .sidebar-heading {
   padding: 0.975rem 2.1rem;
   font-size: .9rem;
+  color: #fff;
 }
 .invoice-container {
     width: 68vw;
@@ -458,6 +537,8 @@ tbody, .bold {
 .dropdown-item {
     font-size: .55rem;
     }
+
+    
 }
 @media (max-width: 450px) {
     #sidebar-wrapper {
@@ -472,6 +553,34 @@ tbody, .bold {
     margin-left: .9rem;
     margin-bottom: 2rem;
 }
+#page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+    
+  }
+  .toggleNav {
+    display: block;
+    display: inline-block;
+  margin-left: 10px;
+  
+  padding: .25rem .75rem;
+  line-height: 1;
+  background-color: transparent;
+    border: 1px solid transparent;
+  font-size: 1.25rem;
+  border-color: rgba(0,0,0,.1);
+  color: rgba(0,0,0,.5);;
+  border-radius: .25rem;
+  }
+
+  a:hover {
+    color: rgba(0,0,0,.5);
+    text-decoration: none;
+  }
+
+  .toggleDesktop {
+    display: none;
+  }
 }
 </style>
 
@@ -481,7 +590,9 @@ tbody, .bold {
 
     <!-- Sidebar -->
     <div class="bg-dark border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Lan<span class="colorC">c</span>ers </div>
+      <a href="index.html">
+        <div class="sidebar-heading">Lan<span class="colorC">c</span>ers </div>
+      </a>
       <div class="list-group list-group-flush">
         <a href="documents.html" class="list-group-item list-group-item-action bg-dark"><img src="https://res.cloudinary.com/samtech/image/upload/v1570727367/home.svg" alt=""> Dashboard</a>
         <a href="#" class="list-group-item list-group-item-action bg-dark"><img src="https://res.cloudinary.com/samtech/image/upload/v1570727365/client.svg" alt=""> Client</a>
@@ -527,15 +638,17 @@ tbody, .bold {
     <div id="page-content-wrapper">
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-
+ <a href="#" class="toggleNav">☰</a>
+ <button type="button" class="toggleDesktop">☰</button>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-left mt-2 mt-lg-0">
+            <!-- <button type="button" class="toggleDesktop">☰</button> -->
             <li class="nav-item ml-3 active">
-              <a class="nav-link " href="#">Project Info <span class="sr-only">(current)</span></a>
+              <a class="nav-link " href="#"><!-- <span class="toggleDesktop">☰</span> -->Project Info <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Link</a>
@@ -552,7 +665,7 @@ tbody, .bold {
           </ul>
         </div>
       </nav> 
-
+<div class="smallcont">
       <section class="invoice-body ml-4"> 
           <div class="container ">
               <div class="row mt-5 ml-4">
@@ -617,7 +730,7 @@ tbody, .bold {
             <section class="invoice-description mt-4    ">
 
                     <table class="table table-responsive container " style="width: 100%">
-                        <thead class="thead" style="background-color: #009FFF; color: white;">
+                        <thead class="thead" style="background-color: #091429; color: white;">
                             <tr>
                                 <th scope="col" class="">Description</th>
                                 <th> </th>
@@ -699,6 +812,7 @@ tbody, .bold {
                 </section>
                 </div>
             </section>
+			</div>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -710,6 +824,22 @@ tbody, .bold {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script>
+    
+    $(function() {
+      $('.toggleNav').on('click',function() {
+        $('#sidebar-wrapper').slideToggle();
+      });
+    });
+
+$(function() {
+      $('.toggleDesktop').on('click',function() {
+        $('#sidebar-wrapper').slideToggle();
+      });
+    });
+
+  </script>
 </body>
 
 </html>
